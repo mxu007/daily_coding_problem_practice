@@ -88,5 +88,3 @@ if __name__ == '__main__':
     reversed_llist_2 = LinkedList()
     reversed_llist_2.head = reverse_2(llist.head)
     reversed_llist_2.printList()
-
-
