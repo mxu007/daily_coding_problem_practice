@@ -38,9 +38,17 @@ def cut_wall_2(lst):
         widths = [sum(lst[height][0:i]) for i in range(1,len(lst[height]))]
         for width in widths:
             cuts[width] +=1 
-
     return len(lst) - max(cuts.values())
 
+# further optimization
+def cut_wall_3(lst):
+    cuts = defaultdict(int)
+    for height in range(0,len(lst)):
+        cum = 0
+        for brick in lst[height][:-1]:
+            cum += brick
+            cuts[cum] +=1 
+    return len(lst) - max(cuts.values())
 
 if __name__ == "__main__":
     lst = [[3,5,1,1],
@@ -52,3 +60,4 @@ if __name__ == "__main__":
 
     print(cut_wall(lst))
     print(cut_wall_2(lst))
+    print(cut_wall_3(lst))
