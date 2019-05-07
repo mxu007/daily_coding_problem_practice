@@ -23,16 +23,22 @@ def subarray_max(lst, k):
 # O(m) time and O(k) space
 from collections import deque
 def subarray_max_2(lst,k):
+    # q is the list that stores the index
     q = deque()
+
+    # iterate the first k elements in the input list
     for i in range(k):
         while q and lst[i] >= lst[q[-1]]:
             q.pop()
         q.append(i)
 
     for i in range(k,len(lst)):
+        # print the value of the leftmost index in q
         print(lst[q[0]])
-        while q and q[0] <= i -k:
+        # moving window, needs to pop from left for earlier index
+        while q and q[0] <= i - k:
             q.popleft()
+        # maintain the order, pop all value that is smaller than current lst[i] value
         while q and lst[i] >= lst[q[-1]]:
             q.pop()
         q.append(i)
