@@ -15,17 +15,18 @@
 # O(1) for insertion
 # save the words in dictionary and compute the sum on demand
 class PrefixMapSum:
-    def __int__(self):
+    def __init__(self):
         self.map = {}
 
     def insert(self, key:str, value:int):
         self.map[key] = value
     
     def sum_prefix(self, prefix):
-        returm sum([val for key,val in self.map.items() if key.startswith(prefix)])
+        #print(self.map.items())
+        return sum([val for key,val in self.map.items() if key.startswith(prefix)])
     
 
-# inserting new words and make sum operation to be more efficient
+# less frequent of inserting new words and make sum operation to be more efficient
 # save the words in the set and sum(prefix as key) in the dictionary
 # O(1) sum computation
 # O(k^2) time for insertion, 
@@ -49,13 +50,66 @@ class PrefixMapSum_1:
         for i in range(1, len(key)+1):
             self.map[key[:i]] += value
     
-    def sum(self,prefix):
+    def sum_prefix(self,prefix):
         return self.map[prefix]
 
-if __name__ == "__main__":
-     pfm = PrefixMapSum()
-     pfm.add("happy",2)
-     pfm.add("halo", 3)
-     pfm.add("hapiness",5)
 
-     print(pfm.sum_prefix("ha"))
+# whenever a problem involves prefixes, a trie hould be one of your go-to options
+# O(k) time complexity for both insert and sum_prefix as it just need to iterate through all letters of input key
+from collections import defaultdict
+class TrieNode:
+    def __init__(self):
+        self.letters = {}
+        self.total = 0
+
+class PrefixMapSum_2:
+    def __init__(self):
+        self._trie = TrieNode()
+        self.map = {}
+
+    def insert(self, key:str, value: int):
+        # the reason of only adding the delta of the value
+        # is due to previously the sum of prefix of key has been already comprehended in the self.total
+        # hence we only update the delta respect to the original key
+        value -= self.map.get(key,0)
+        self.map[key] = value
+
+        trie = self._trie
+        for char in key:
+            # create new trie node
+            # each trie node comes with letters and total
+            if char not in trie.letters:
+                trie.letters[char] = TrieNode()
+            # go to a detter trie
+            trie = trie.letters[char]
+            trie.total += value
+
+    def sum_prefix(self,prefix):
+        d = self._trie
+        for char in prefix:
+            if char in d.letters:
+                d = d.letters[char]
+            else:
+                return 0
+        return d.total
+
+
+if __name__ == "__main__":
+    pfm = PrefixMapSum()
+    pfm.insert("happy",2)
+    pfm.insert("halo", 3)
+    pfm.insert("hapiness",5)
+    print(pfm.sum_prefix("ha"))
+
+    pfm_1 = PrefixMapSum_1()
+    pfm_1.insert("happy",2)
+    pfm_1.insert("halo", 3)
+    pfm_1.insert("hapiness",5)
+    print(pfm_1.sum_prefix("ha"))
+
+    pfm_2 = PrefixMapSum_2()
+    pfm_2.insert("happy",2)
+    pfm_2.insert("happy",100)
+    pfm_2.insert("halo", 3)
+    pfm_2.insert("hapiness",5)
+    print(pfm_2.sum_prefix("ha"))
