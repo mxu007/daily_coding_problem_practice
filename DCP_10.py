@@ -6,6 +6,7 @@
 # dfs uses a set to store nodes visited
 # O(V+E) time where V is no.of verticies and E is no.of edges
 # O(V) space
+# https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
 def DFS(graph, start, visited = set()):
     visited.add(start)
     for neighbor in graph[start]:
@@ -16,6 +17,7 @@ def DFS(graph, start, visited = set()):
 # bfs uses a queue. For each item we pop off the queue, we find its unvisited neighbors and add them to the end of the queue
 # O(V+E) time where V is no.of verticies and E is no.of edges
 # O(V) space
+# https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 from collections import deque
 def BFS(graph, start, visited = set()):
     queue = deque([start])

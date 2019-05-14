@@ -3,6 +3,8 @@
 
 # implement the solution using depth-first search. For each vertex in the graph, if it has not already been visited. we call our search function on it. This function will recursively traverse unvisited neighbors of the vertex and return True if we come accross the cycle.
 
+# https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+
 from collections import defaultdict 
   
 class Graph(): 
@@ -11,9 +13,9 @@ class Graph():
         self.V = vertices 
   
     def addEdge(self,u,v): 
+        # undirected graph
         self.graph[u].append(v) 
-        if v not in self.graph:
-            self.graph[v] = []
+        self.graph[v].append(u) 
 
 # O(V+E) time complexity where V is no.of verticies and E is no.of edges
 # O(V) for visiting each vertice, E for adding each edge connected to the vertice currently visiting
