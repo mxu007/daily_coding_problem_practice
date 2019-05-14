@@ -17,7 +17,7 @@ class Graph():
 
 # O(V+E) time complexity where V is no.of verticies and E is no.of edges
 # O(V) for visiting each vertice, E for adding each edge connected to the vertice currently visiting
-
+# O(V) space for the call stack of traversing all possible verticies 
 def search(graph, vertex, visited, parent):
     visited[vertex] = True
 
