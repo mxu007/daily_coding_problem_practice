@@ -25,7 +25,7 @@ class BIT:
     # actual tree is a list/array which alternatively stores the sum
     # if the index is even, simply store the value of subscribers[i]
     # if the index is odd, store the sum of range of values up to i whose length is a power of two
-    # for update to increment index, t
+    # for update to increment index
     def update(self, index, value):
         # update start from the index, he value at index impacts all tree value with index above this input index
         while index < len(self.tree):
