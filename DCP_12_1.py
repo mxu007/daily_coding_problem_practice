@@ -22,6 +22,7 @@ def tower_of_hanoi(n, a='1', b='2', c='3'):
     if n >= 1:
         # recursively move n-1 disks from source stack to the spare stack
         tower_of_hanoi(n-1, a, c, b)
+        # move the last (biggest) disk from source stack to the target stack
         print('move {} to {}'.format(a,c))
         # recursively move n-1 disks from spare stack to the target stack
         tower_of_hanoi(n-1,b, a, c)
