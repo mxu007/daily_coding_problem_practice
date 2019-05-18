@@ -11,6 +11,7 @@ from collections import defaultdict
 
 # top-down with memorization using recursive call
 # O(S*n) where S is the amount and n is the denomination count, n=2 in this case
+# In the worst case the recursive tree of the algorithm has height of SS and the algorithm solves only SS subproblems because it caches precalculated solutions in a table. Each subproblem is computed with nn iterations, one by coin denomination. Therefore there is O(S*n)O(S∗n) time complexity.
 # O(S) space where S=100 in this case
 def coin_ways(n, cache= defaultdict(int)):
     cache[0] = 1
