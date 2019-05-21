@@ -1,11 +1,11 @@
-# You are given a string of length n and an integer k. The string can be manipulated by taking one of the first k letters and moving it to the end of string. 
+# You are given a string of length n and an integer k. The string can be manipulated by taking one of the first k letters and moving it to the end of string.
 
 # write program to determine the lexicographically smallest string that can be created after an unlimited number of moves
 
 # E.g. input: string = 'daily' and k = 1
 # output = 'ailyd'
 
-# possible manipulation 
+# possible manipulation
 # 'ailyd', 'ilyda', 'lydai', 'ydail', 'daily'
 
 # if k >= 2, remeber we can only take ONE of the first k letters and moving it to the end
@@ -13,7 +13,7 @@
 # 'xxbaxx'
 # 'xbaxxx'
 # 'baxxxx' takng one ('a') and move it to the end
-# 'bxxxxa' 
+# 'bxxxxa'
 # 'xxxxab'
 # ...
 # 'abxxxx' 'ba' has been sorted
@@ -25,13 +25,21 @@
 # O(N) space complexit to store smallest
 
 def smallest_roated_str(string, k):
-    string_list = list(string)
+    # remember to avoid confusion, python string is immutable
+    # immutable objects are automatically treadsafe
+    string_list = string
     smallest = string_list
     if k == 1:
         for i in range(len(string_list)):
             if string_list[i:] + string_list[:i] < smallest:
-                smallest = string_list[i:] + string_list[:i] 
+                smallest = string_list[i:] + string_list[:i]
     else:
         smallest = sorted(string_list)
-    
+
     return ('').join(smallest)
+
+
+if __name__ == "__main__":
+    string = "daily"
+    k = 1
+    print(smallest_roated_str(string,k))
