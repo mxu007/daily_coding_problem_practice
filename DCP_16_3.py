@@ -30,7 +30,7 @@ if __name__ == "__main__":
         0:[1,3],
         1:[2],
         2:[],
-        3:[]
+        3:[]wz
     }
     print(closure(graph))
     
